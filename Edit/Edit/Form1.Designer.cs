@@ -1,4 +1,4 @@
-﻿namespace Edit
+﻿namespace DadaIDE.Edit
 {
     partial class Form1
     {
