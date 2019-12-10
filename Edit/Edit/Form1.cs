@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DadaIDE.Edit
+namespace Edit
 {
     public partial class Form1 : Form
     {
@@ -103,6 +103,13 @@ namespace DadaIDE.Edit
             {
                 System.IO.File.WriteAllText(saveFileDialog.FileName, textBox.Text); 
             }
+        }
+
+        private void 开始执行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TextBox textBox=(TextBox)Controls.Find("programInput", false).First();
+            Lex lex = new Lex("");
+            lex.test();
         }
     }
 }

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DadaIDE.Compiler.Error
+namespace Edit.Error
 {
 
     /// <summary>
     /// 所有错误的基类
     /// </summary>
-    public class CompileException:Exception
+    public class ComplieException:Exception
     {
         protected String hint=null;//错误提示
         protected String line = null;//错误所处的行
@@ -18,7 +18,7 @@ namespace DadaIDE.Compiler.Error
         protected String filepath = null;//错误文件
         protected String name= "ComplieError";
 
-        public CompileException(String hint)
+        public ComplieException(String hint)
         {
             this.hint = hint;
         }
@@ -44,7 +44,7 @@ namespace DadaIDE.Compiler.Error
     /// <summary>
     /// 词法分析错误
     /// </summary>
-    public class SyntaxException : CompileException
+    public class SyntaxException : ComplieException
     {
         public SyntaxException(string hint) : base(hint)
         {
@@ -55,11 +55,20 @@ namespace DadaIDE.Compiler.Error
     /// <summary>
     /// 语义分析错误
     /// </summary>
-    public class SemanticsException : CompileException
+    public class SemanticsException : ComplieException
     {
         public SemanticsException(string hint) : base(hint)
         {
             this.name = "SemanticsError";
         }
+    }
+
+    public class TypeException : ComplieException
+    {
+        public TypeException(string hint) : base(hint)
+        {
+            this.name = "TypeException";
+        }
+
     }
 }

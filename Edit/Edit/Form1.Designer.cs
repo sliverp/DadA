@@ -1,4 +1,4 @@
-﻿namespace DadaIDE.Edit
+﻿namespace Edit
 {
     partial class Form1
     {
@@ -50,7 +50,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(12, 4, 0, 4);
-            this.menuStrip1.Size = new System.Drawing.Size(126, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(246, 29);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -82,6 +82,7 @@
             this.开始执行ToolStripMenuItem.Name = "开始执行ToolStripMenuItem";
             this.开始执行ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.开始执行ToolStripMenuItem.Text = "开始执行";
+            this.开始执行ToolStripMenuItem.Click += new System.EventHandler(this.开始执行ToolStripMenuItem_Click);
             // 
             // flowLayoutPanel1
             // 
