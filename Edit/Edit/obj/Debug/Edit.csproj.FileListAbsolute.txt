@@ -8,3 +8,13 @@ F:\代码\c#\Edit\Edit\obj\Debug\Edit.csproj.GenerateResource.cache
 F:\代码\c#\Edit\Edit\obj\Debug\Edit.csproj.CoreCompileInputs.cache
 F:\代码\c#\Edit\Edit\obj\Debug\Edit.exe
 F:\代码\c#\Edit\Edit\obj\Debug\Edit.pdb
+F:\代码\GitHub\DadA\Edit\Edit\bin\Debug\Edit.exe.config
+F:\代码\GitHub\DadA\Edit\Edit\bin\Debug\Edit.exe
+F:\代码\GitHub\DadA\Edit\Edit\bin\Debug\Edit.pdb
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csprojAssemblyReference.cache
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.Form1.resources
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.Properties.Resources.resources
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.GenerateResource.cache
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.CoreCompileInputs.cache
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.exe
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.pdb

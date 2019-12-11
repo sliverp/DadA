@@ -71,4 +71,13 @@ namespace Edit.Error
         }
 
     }
+
+    public class VariableVinconsistent : ComplieException
+    {//形式参数与实际参数数量不一致
+        public VariableVinconsistent(string hint) : base(hint)
+        {
+            this.name = "VariableVinconsistent ";
+        }
+
+    }
 }
