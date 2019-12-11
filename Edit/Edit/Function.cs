@@ -8,28 +8,61 @@ using Edit.Error;
 
 namespace Edit
 {
-    class Function:MateData
+    class FunctionBuilder:MateData
     {
         List<Operation> optionList;
-        List<MateData> optionResult;
-        List<String> args;
-        int argsPushPointer = 0;
+        public String name;
         SignTable localVariables = new SignTable();
-        List<MateData> argsData = new List<MateData>();
-        public Function(String id) : base(id) { }
+        public FunctionBuilder(String name):base(name)
+        {
+            this.name = name;
+        }
+
         public void addArgs(Sign arg)//声明函数时用于添加形式参数
         {
             this.localVariables.Add(arg);
         }
 
-        public void setArgs(Sign arg)//调用函数时添加实参
+        public Function build(List<Sign> args)
         {
-            if (argsPushPointer >= localVariables.ToArray().Length)
+            Function f = new Function(Utils.getRandomId(), this.name);
+            f.setArgsTable(this.localVariables);.
+            f.setArgs(args);
+            Lex.TotalSignList.Add(new Sign(f));
+            return f;
+        }
+        public void setOperationList(List<Operation> optionList)
+        {
+            this.optionList = optionList;
+        }
+    }
+
+
+    class Function:MateData
+    {
+        List<Operation> optionList;
+        List<MateData> optionResult;
+        String name;
+        int argsPushPointer = 0;
+        SignTable localVariables = new SignTable();
+        List<MateData> argsData = new List<MateData>();
+
+        public Function(String id) : base(id) { }
+        public Function(String id,String name) : base(id) { this.name = name; }
+
+
+        public void setArgs(List<Sign> args)//调用函数时添加实参
+        {
+            if (args.ToArray().Length > localVariables.ToArray().Length)
             {
                 VariableVinconsistent vv=new  VariableVinconsistent("形式参数与实际参数数量不一致");
                 throw vv;
-            }         
-            this.localVariables[this.argsPushPointer++].content = arg.content;
+            }
+            foreach(Sign arg in args)
+            {
+                this.localVariables.Add(arg);
+            }
+            
         }
         public void setOptionList(List<Operation> optionList)
         {

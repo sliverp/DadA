@@ -27,6 +27,7 @@ namespace Edit
             this.id = id;
             this.type = type;
         }
+        
     }
     class SignTable: List<Sign>
     {
@@ -45,12 +46,24 @@ namespace Edit
         {
             return this.Find((e) => e.id == id);
         }
+
+       
+        public bool isIn(String id)
+        {
+            return this.Find((e) => e.id == id) != null;
+        }
+
+        public int size()
+        {
+            return this.ToArray().Length;
+        }
     }
     class Lex
     {
         public static SignTable TotalSignList = new SignTable();//全局符号表
         public List<Operation> optionsList = new List<Operation>();
         public List<List<String>> sentencec = new List<List<string>>();
+        public static List<FunctionBuilder> FunctionBuilders = new List<FunctionBuilder>();//存有哪些函数
         public Lex(String program)
         {
             List<String> sentences = program.Split(';').ToList();
@@ -125,16 +138,22 @@ namespace Edit
 
             SignTable signs = new SignTable();
 
+            //Func foo(a)=================
             Sign s1 = new Sign("保留字");
-            Sign s2 = new Sign("foo");
+            Sign s2 = new Sign("foo","funcname");
             Sign args = new Sign("a", "args");
 
+            signs.Add(s1);
+            signs.Add(s2);
+            signs.Add(args);
+
+            FunctionDefinationOpration fdo = new FunctionDefinationOpration(signs);
+            //=====================================
 
             List<Operation> fooOperator = new List<Operation>();
-
+            //    b=a+1;===========================
             SignTable op1Signtable = new SignTable();
-
-            
+  
             Sign b = new Sign(new DadaInt("b"));
             b.type = "结果";
 
@@ -147,37 +166,49 @@ namespace Edit
             op1Signtable.Add(b);
             op1Signtable.Add(a);
             op1Signtable.Add(c);
+            AssignOperation assign1 = new AssignOperation(op1Signtable);
 
-            
+            //=========================================
 
+
+            //    foo(b);===============================
             SignTable op2Signtable = new SignTable();
 
-            Function foo = new Function("foo");
-            foo.setArgs(new Sign("b"));
-            op2Signtable.Add(new Sign(foo));
+            //List<FunctionBuilder>可能单独优化成一个类,这句话语法可以优化,但就是这个意思
+            FunctionBuilder foobuilder = Lex.FunctionBuilders.Find((e) => e.name == "foo");
+            foobuilder.addArgs(new Sign("b"));
+            op2Signtable.Add(new Sign(foobuilder));
 
 
-            AssignOperation assign1 = new AssignOperation(op1Signtable);
+            
             AssignOperation assign2 = new AssignOperation(op2Signtable);
+            //===============================================
 
 
+
+            // }  =====================函数声明结尾时的花括号
             List<Operation> operations = new List<Operation>();
             operations.Add(assign1);
             operations.Add(assign2);
-
-            FunctionDefinationOpration fdo = new FunctionDefinationOpration(signs, operations);
-
-
+            fdo.addOperatorList(operations);
+            //=======================================================
 
 
+
+            //foo(1);==============================
             SignTable useSigntable = new SignTable();
-            Function function = new Function("foo");
+
+            FunctionBuilder f1 = Lex.FunctionBuilders.Find((e) => e.name == "foo");
+            //Function foo1 = Lex.FunctionBuilders.Find((e) => e.name == "foo").build();
             DadaInt shican = new DadaInt("");
             shican.setData("1");
-            function.setArgs(new Sign(shican));
-            useSigntable.Add(new Sign(function));
+            Sign sc = new Sign(shican);
+            sc.type = "args";
+            //foo1.setArgs(new Sign(shican));
+            useSigntable.Add(new Sign(f1));
+            useSigntable.Add(sc);
             AssignOperation use = new AssignOperation(useSigntable);
-
+            //==================================
 
             use.doSomethings();
 

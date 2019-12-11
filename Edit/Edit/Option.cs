@@ -29,14 +29,23 @@ namespace Edit
         }
         public override void doSomethings()
         {
-            foreach(Sign sign in signTable)
+
+            for(int i=0;i< signTable.size(); i++)
             {
-                if (sign.content is Function)
+                if(signTable[i].content is FunctionBuilder)
                 {
-                    Function f = (Function)sign.content;
-                    MateData fResult = f.run();
-                    sign.content = fResult;
-                   
+                    List<Sign> trueArgs = new List<Sign>();
+                    for (int j = i+1; j < signTable.size(); i++)
+                    {//向后检索实参列表
+                        if (signTable[j].type == "args") trueArgs.Add(signTable[j]);
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    Function f = ((FunctionBuilder)signTable[i].content).build(trueArgs);
+                    MateData fResult=f.run();
+                    signTable[i].content = fResult;
                 }
             }
             String s = "";
@@ -65,8 +74,7 @@ namespace Edit
             {
                 result = data;
                 this.mean = "返回";
-            }
-               
+            }     
         }
     }
     class FunctionDefinationOpration : Operation
@@ -106,29 +114,36 @@ namespace Edit
      operations[2]=AssignmentOperation()
 
              */
-        public FunctionDefinationOpration(SignTable signs,List<Operation> operations)
-        {
-            String funcId = "";
+
+        Function f;
+        FunctionBuilder fb;
+        String funcname = "";
+        public FunctionDefinationOpration(SignTable signs)
+        {            
             if (signs[0].type == "保留字")
             {
                 foreach (Sign sign in signs)
                 {
-                    if (sign.type == "保留字") continue;
-                    if(sign.content is Function)
+                    if (sign.type == "保留字") continue;//讲道理不需要验证,但是验证一下显得专业
+                    if(sign.type== "funcname")//讲道理不需要验证,但是验证一下显得专业
                     {
-                        funcId = sign.id;
-                        Function f = new Function(sign.id);
-                        Lex.TotalSignList.Add(new Sign(f));//建立函数至符号表
-                        f.setOptionList(operations);
+                        funcname = sign.id;
+                        f = new Function(sign.id);
+                        fb = new FunctionBuilder(funcname);
                         continue;
                     }
                     if (sign.type == "args")
                     {
-                        Sign func = Lex.TotalSignList.getSignById(funcId);
-                        ((Function)func.content).addArgs(sign);
+                        fb.addArgs(sign);
+                        Lex.FunctionBuilders.Add(fb);
                     }
                 }
             }           
+        }
+
+        public void addOperatorList( List<Operation> operations)
+        {
+            Lex.FunctionBuilders.Find((e) => e.name == funcname).setOperationList(operations);
         }
 
         public override void doSomethings()
