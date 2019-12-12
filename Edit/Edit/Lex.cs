@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Edit.Data;
 
 namespace Edit
@@ -17,9 +18,15 @@ namespace Edit
             this.id = content.id;
             this.content = content;
         }
-        public Sign(String type)
+        public Sign(MateData content, String type)
         {
+            this.id = content.id;
+            this.content = content;
             this.type = type;
+        }
+        public Sign(String id)
+        {
+            this.id = id;
         }
 
         public Sign(String id,String type)
@@ -48,7 +55,7 @@ namespace Edit
         }
 
        
-        public bool isIn(String id)
+        public bool has(String id)
         {
             return this.Find((e) => e.id == id) != null;
         }
@@ -134,12 +141,12 @@ namespace Edit
             //foo(1)
 
 
-            //有bug,先别测试
+      
 
-            SignTable signs = new SignTable();
 
             //Func foo(a)=================
-            Sign s1 = new Sign("保留字");
+            SignTable signs = new SignTable();
+            Sign s1 = new Sign("","保留字");
             Sign s2 = new Sign("foo","funcname");
             Sign args = new Sign("a", "args");
 
@@ -150,22 +157,24 @@ namespace Edit
             FunctionDefinationOpration fdo = new FunctionDefinationOpration(signs);
             //=====================================
 
+
+
+            // {=====================函数定义的前括号
             List<Operation> fooOperator = new List<Operation>();
+
+
+            //==================================
+
+
+
             //    b=a+1;===========================
             SignTable op1Signtable = new SignTable();
+
+            op1Signtable.Add(new Sign("b","结果"));
+            op1Signtable.Add(new Sign("a"));
+            op1Signtable.Add(new Sign("","+"));
+            op1Signtable.Add(new Sign(new DadaInt("","1")));
   
-            Sign b = new Sign(new DadaInt("b"));
-            b.type = "结果";
-
-            Sign a = new Sign(new DadaInt("a"));
-
-            DadaInt dadaInt = new DadaInt("c");
-            dadaInt.setData("1");
-            Sign c = new Sign(dadaInt);
-
-            op1Signtable.Add(b);
-            op1Signtable.Add(a);
-            op1Signtable.Add(c);
             AssignOperation assign1 = new AssignOperation(op1Signtable);
 
             //=========================================
@@ -176,11 +185,12 @@ namespace Edit
 
             //List<FunctionBuilder>可能单独优化成一个类,这句话语法可以优化,但就是这个意思
             FunctionBuilder foobuilder = Lex.FunctionBuilders.Find((e) => e.name == "foo");
-            foobuilder.addArgs(new Sign("b"));
-            op2Signtable.Add(new Sign(foobuilder));
-
 
             
+            op2Signtable.Add(new Sign(foobuilder));
+            op2Signtable.Add(new Sign("b", "args"));
+
+
             AssignOperation assign2 = new AssignOperation(op2Signtable);
             //===============================================
 
@@ -199,18 +209,12 @@ namespace Edit
             SignTable useSigntable = new SignTable();
 
             FunctionBuilder f1 = Lex.FunctionBuilders.Find((e) => e.name == "foo");
-            //Function foo1 = Lex.FunctionBuilders.Find((e) => e.name == "foo").build();
-            DadaInt shican = new DadaInt("");
-            shican.setData("1");
-            Sign sc = new Sign(shican);
-            sc.type = "args";
-            //foo1.setArgs(new Sign(shican));
             useSigntable.Add(new Sign(f1));
-            useSigntable.Add(sc);
+            useSigntable.Add(new Sign(new DadaInt("","1"),"args"));
             AssignOperation use = new AssignOperation(useSigntable);
             //==================================
 
-            use.doSomethings();
+            use.doSomethings(Lex.TotalSignList);
 
 
         }

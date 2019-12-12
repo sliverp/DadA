@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,6 +13,8 @@ namespace Edit
 {
     public partial class Form1 : Form
     {
+        
+        public static TextBox output;
         public Form1()
         {
             InitializeComponent();
@@ -108,8 +111,13 @@ namespace Edit
         private void 开始执行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //TextBox textBox=(TextBox)Controls.Find("programInput", false).First();
+            Form1.output = (TextBox)Controls.Find("textBox2", false).First();
+            
             Lex lex = new Lex("");
-            lex.test();
+            Thread thread = new Thread(new ThreadStart(lex.test));
+            thread.Start();
+            
+          
         }
     }
 }

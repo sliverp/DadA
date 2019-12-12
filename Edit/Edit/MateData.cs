@@ -65,6 +65,9 @@ namespace Edit.Data
     {
         private BigInteger storage;//大整数
         public DadaInt(string id) : base(id) { }
+        public DadaInt(string id, string data) : base(id) {
+            this.storage = BigInteger.Parse(data);
+        }
         public void setData(String content)
         {
             this.storage = BigInteger.Parse(content);

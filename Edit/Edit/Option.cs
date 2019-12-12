@@ -12,7 +12,7 @@ namespace Edit
     {
         public String mean;
         public SignTable signTable;//符号表
-        abstract public void doSomethings();
+        abstract public void doSomethings(SignTable signTable);//拿到局部变量的符号表
         public MateData result;
     }
 
@@ -20,22 +20,37 @@ namespace Edit
     class AssignOperation : Operation
     {
         private MateData assigned;//需要被赋值的对象;
-        
+        private SignTable localSignTable;
         private List<MateData> dataList;
         public AssignOperation(SignTable signTable)
         {
             this.signTable = signTable;
             this.mean = "赋值";
         }
-        public override void doSomethings()
+        public override void doSomethings(SignTable sTable)
         {
-
-            for(int i=0;i< signTable.size(); i++)
+            this.localSignTable = sTable;
+            foreach (Sign sign in signTable)
             {
-                if(signTable[i].content is FunctionBuilder)
+                if (this.localSignTable.has(sign.id))
                 {
+                    sign.content = this.localSignTable.getSignById(sign.id).content;
+                }
+                else if (sign.content is Hashable)
+                {
+                    if (sign.id != "")
+                        this.localSignTable.Add(sign);
+                }
+            }
+            for (int i=0;i< signTable.size(); i++)
+            {
+
+                
+
+                    if (signTable[i].content is FunctionBuilder)
+                    {
                     List<Sign> trueArgs = new List<Sign>();
-                    for (int j = i+1; j < signTable.size(); i++)
+                    for (int j = i+1; j < signTable.size(); j++)
                     {//向后检索实参列表
                         if (signTable[j].type == "args") trueArgs.Add(signTable[j]);
                         else
@@ -51,6 +66,15 @@ namespace Edit
             String s = "";
             foreach(Sign sign in signTable)
             {
+                if (this.localSignTable.has(sign.id)){
+                    sign.content = this.localSignTable.getSignById(sign.id).content;
+                }
+                else if(sign.content is Hashable)
+                {
+                    if(sign.id!="")
+                        this.localSignTable.Add(sign);
+                }
+
                 if (sign.type == "结果") continue;
                 if(sign.content is Hashable)
                 {
@@ -67,6 +91,16 @@ namespace Edit
             DadaInt data = new DadaInt("ddd");
             data.setData(x.ToString());
             Sign ss = signTable.Find((e) => e.type == "结果");
+
+            if (this.localSignTable.has(ss.id)) {
+                ss.content = this.localSignTable.getSignById(ss.id).content;
+            }
+            else
+            {
+                this.localSignTable.Add(ss);
+            }
+
+            //
             if (ss != null) {
                 ss.content = data;
             }
@@ -135,9 +169,10 @@ namespace Edit
                     if (sign.type == "args")
                     {
                         fb.addArgs(sign);
-                        Lex.FunctionBuilders.Add(fb);
+                        
                     }
                 }
+                Lex.FunctionBuilders.Add(fb);
             }           
         }
 
@@ -146,18 +181,10 @@ namespace Edit
             Lex.FunctionBuilders.Find((e) => e.name == funcname).setOperationList(operations);
         }
 
-        public override void doSomethings()
+        public override void doSomethings(SignTable signTable)
         {
             //nothing to do
         }
     }
-    class ReturnOpthon : Operation
-    {
-        MateData returnDate;
-        public override void doSomethings()
-        {
 
-            throw new NotImplementedException();
-        }
-    }
 }

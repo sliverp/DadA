@@ -26,8 +26,9 @@ namespace Edit
         public Function build(List<Sign> args)
         {
             Function f = new Function(Utils.getRandomId(), this.name);
-            f.setArgsTable(this.localVariables);.
-            f.setArgs(args);
+            f.setFormalArgsList(this.localVariables);
+            f.setArgsList(args);
+            f.setOptionList(this.optionList);
             Lex.TotalSignList.Add(new Sign(f));
             return f;
         }
@@ -51,18 +52,26 @@ namespace Edit
         public Function(String id,String name) : base(id) { this.name = name; }
 
 
-        public void setArgs(List<Sign> args)//调用函数时添加实参
+        public void setArgsList(List<Sign> args)//调用函数时添加实参
         {
             if (args.ToArray().Length > localVariables.ToArray().Length)
             {
                 VariableVinconsistent vv=new  VariableVinconsistent("形式参数与实际参数数量不一致");
                 throw vv;
             }
-            foreach(Sign arg in args)
+            for(int i = 0; i < args.ToArray().Length; i++)
             {
-                this.localVariables.Add(arg);
+                this.localVariables[i].content = args[i].content;
             }
             
+        }
+
+        public void setFormalArgsList(SignTable localVariables)
+        {
+            foreach(Sign sign in localVariables)
+            {
+                this.localVariables.Add(new Sign(sign.id));
+            }
         }
         public void setOptionList(List<Operation> optionList)
         {
@@ -84,7 +93,15 @@ namespace Edit
         {
             foreach(Operation op in this.optionList)
             {
-                op.doSomethings();
+                op.doSomethings(this.localVariables);
+                 //测试时输出用 
+                String s= this.localVariables[0].content.toString() + "\r\n";
+                Form1.output.Invoke(new Action(() =>
+                {
+                    Form1.output.Text += s;
+                }));
+                System.Threading.Thread.Sleep(1000);
+                //==============
             }
             return optionList.Find((c) =>c.mean == "返回").result;
         }

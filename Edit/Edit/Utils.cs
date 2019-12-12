@@ -16,7 +16,7 @@ namespace Edit
             {
                 int a1 = r1.Next(1, int.MaxValue);
                 s = a1.ToString();
-            } while (Lex.TotalSignList.isIn(s));
+            } while (Lex.TotalSignList.has(s));
             return s;
 
         }
