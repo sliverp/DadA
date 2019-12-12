@@ -182,11 +182,19 @@ namespace Edit
 
 
 
+
+
+
+
+
             // {=====================函数定义的前括号
             List<Operation> fooOperator = new List<Operation>();
-
-
             //==================================
+
+
+
+
+
 
 
 
@@ -199,8 +207,15 @@ namespace Edit
             op1Signtable.Add(new Sign(new DadaInt("","1")));
   
             AssignOperation assign1 = new AssignOperation(op1Signtable);
-
             //=========================================
+
+
+
+
+
+
+
+
 
 
             //    foo(b);===============================
@@ -216,12 +231,21 @@ namespace Edit
 
 
 
+
+
+
+
             // }  =====================函数声明结尾时的花括号
             List<Operation> operations = new List<Operation>();
             operations.Add(assign1);
             operations.Add(assign2);
             fdo.addOperatorList(operations);
             //=======================================================
+
+
+
+
+
 
 
 
@@ -233,6 +257,10 @@ namespace Edit
             useSigntable.Add(new Sign(new DadaInt("","1"),"args"));
             AssignOperation use = new AssignOperation(useSigntable);
             //==================================
+
+
+
+
 
             use.doSomethings(Lex.TotalSignList);
 
