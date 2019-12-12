@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Edit.Data;
-
+using Edit.Error;
 namespace Edit
 {
     class Sign {
@@ -65,12 +65,35 @@ namespace Edit
             return this.ToArray().Length;
         }
     }
+
+    class FunctionTable: List<FunctionBuilder>
+    {
+        public FunctionBuilder getFunctionBuilderByName(String name)
+        {
+            FunctionBuilder f = null;
+            f = this.Find((e) => e.name == name);
+            if (f == null)
+            { 
+                FunctionNotDefine fe=new FunctionNotDefine("函数名:"+name+"未定义");
+                throw fe;
+            }
+            return f;
+        }
+
+        public Function buildFunctionByName(String name,List<Sign> args)
+        {
+            FunctionBuilder fb = this.getFunctionBuilderByName(name);
+            Function f = fb.build(args);
+            return f;
+        }
+    }
+
     class Lex
     {
         public static SignTable TotalSignList = new SignTable();//全局符号表
         public List<Operation> optionsList = new List<Operation>();
         public List<List<String>> sentencec = new List<List<string>>();
-        public static List<FunctionBuilder> FunctionBuilders = new List<FunctionBuilder>();//存有哪些函数
+        public static FunctionTable TotalFunctionList = new FunctionTable();//存有哪些声明的函数
         public Lex(String program)
         {
             List<String> sentences = program.Split(';').ToList();
@@ -141,7 +164,7 @@ namespace Edit
             //foo(1)
 
 
-      
+            
 
 
             //Func foo(a)=================
@@ -182,11 +205,8 @@ namespace Edit
 
             //    foo(b);===============================
             SignTable op2Signtable = new SignTable();
-
-            //List<FunctionBuilder>可能单独优化成一个类,这句话语法可以优化,但就是这个意思
-            FunctionBuilder foobuilder = Lex.FunctionBuilders.Find((e) => e.name == "foo");
-
-            
+    
+            FunctionBuilder foobuilder = Lex.TotalFunctionList.getFunctionBuilderByName("foo");     
             op2Signtable.Add(new Sign(foobuilder));
             op2Signtable.Add(new Sign("b", "args"));
 
@@ -208,7 +228,7 @@ namespace Edit
             //foo(1);==============================
             SignTable useSigntable = new SignTable();
 
-            FunctionBuilder f1 = Lex.FunctionBuilders.Find((e) => e.name == "foo");
+            FunctionBuilder f1 = Lex.TotalFunctionList.Find((e) => e.name == "foo");
             useSigntable.Add(new Sign(f1));
             useSigntable.Add(new Sign(new DadaInt("","1"),"args"));
             AssignOperation use = new AssignOperation(useSigntable);

@@ -80,4 +80,14 @@ namespace Edit.Error
         }
 
     }
+
+
+    public class FunctionNotDefine : ComplieException
+    {//函数未定义
+        public FunctionNotDefine(string hint) : base(hint)
+        {
+            this.name = "FunctionNotDefine";
+        }
+
+    }
 }

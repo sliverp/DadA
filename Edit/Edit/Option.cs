@@ -45,8 +45,6 @@ namespace Edit
             for (int i=0;i< signTable.size(); i++)
             {
 
-                
-
                     if (signTable[i].content is FunctionBuilder)
                     {
                     List<Sign> trueArgs = new List<Sign>();
@@ -172,13 +170,13 @@ namespace Edit
                         
                     }
                 }
-                Lex.FunctionBuilders.Add(fb);
+                Lex.TotalFunctionList.Add(fb);
             }           
         }
 
         public void addOperatorList( List<Operation> operations)
         {
-            Lex.FunctionBuilders.Find((e) => e.name == funcname).setOperationList(operations);
+            Lex.TotalFunctionList.Find((e) => e.name == funcname).setOperationList(operations);
         }
 
         public override void doSomethings(SignTable signTable)
