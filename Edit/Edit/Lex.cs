@@ -218,7 +218,7 @@ namespace Edit
 
 
 
-            //    foo(b);===============================
+            //    foo ( b ) ;===============================
             SignTable op2Signtable = new SignTable();
     
             FunctionBuilder foobuilder = Lex.TotalFunctionList.getFunctionBuilderByName("foo");     
@@ -252,7 +252,7 @@ namespace Edit
             //foo(1);==============================
             SignTable useSigntable = new SignTable();
 
-            FunctionBuilder f1 = Lex.TotalFunctionList.Find((e) => e.name == "foo");
+            FunctionBuilder f1 = Lex.TotalFunctionList.getFunctionBuilderByName("foo");
             useSigntable.Add(new Sign(f1));
             useSigntable.Add(new Sign(new DadaInt("","1"),"args"));
             AssignOperation use = new AssignOperation(useSigntable);
