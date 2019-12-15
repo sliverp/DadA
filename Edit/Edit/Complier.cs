@@ -57,14 +57,6 @@ namespace Edit
             {
                 this.endRunner();
             }
-           
-            
-
-
-           
-
-
-
         }
 
 
@@ -94,6 +86,7 @@ namespace Edit
             }
              
              */
+
 
             //a=1;=====================================
             SignTable st1 = new SignTable();

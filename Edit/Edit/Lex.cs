@@ -99,6 +99,7 @@ namespace Edit
         public static FunctionTable TotalFunctionList = new FunctionTable();//存有哪些声明的函数
         public Lex(String program)
         {
+            //从这里开始分析
             List<String> sentences = program.Split(';').ToList();
             foreach(String sentence in sentences)
             {
