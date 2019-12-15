@@ -13,6 +13,8 @@ namespace Edit
         public void init()
         {
             //初始化系统函数
+
+            //初始化print函数
             FunctionBuilder printFB = new FunctionBuilder("print");
             Function f = new Print("");
             printFB.setTemplateFunction(f);
@@ -22,6 +24,7 @@ namespace Edit
         }
        public ComplierAndRunner(String program)
         {
+            //内存有点泄漏,再说
             this.Lexer = new Lex(program);
             this.init();
            

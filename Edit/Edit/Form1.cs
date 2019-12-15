@@ -112,10 +112,11 @@ namespace Edit
         {
             //TextBox textBox=(TextBox)Controls.Find("programInput", false).First();
             Form1.output = (TextBox)Controls.Find("textBox2", false).First();
+            Form1.output.Text = "";
             ComplierAndRunner complier = new ComplierAndRunner("");
-            //Lex lex = new Lex("");
             Thread thread = new Thread(new ThreadStart(complier.programStart));
             thread.Start();
+
             
           
         }
