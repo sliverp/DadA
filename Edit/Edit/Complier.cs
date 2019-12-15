@@ -46,8 +46,9 @@ namespace Edit
         {
             try
             {
-                Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
-                startFunction.run();
+                //Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
+                //startFunction.run();
+                test();
             }
             catch (FunctionNotDefine e)
             {
