@@ -8,6 +8,7 @@ using Edit.Data;
 using Edit.Error;
 namespace Edit
 {
+    [Serializable]
     class Sign {
         public String id;
         public String type;
@@ -36,6 +37,8 @@ namespace Edit
         }
         
     }
+   
+    [Serializable]
     class SignTable: List<Sign>
     {
         public bool isInSignTable(String id)
@@ -108,60 +111,64 @@ namespace Edit
 
             return true;
         }
-        public void test()//以下全是test!!!!!!!!!!
-        {
-            //f(){
-            //    return 1 + 2;
-            //}
-            //a = f();
-            //SignTable signs = new SignTable();
-
-            //DadaInt a = new DadaInt("a");
-            //a.setData("456789");
-            //signs.Add(new Sign(a));
-
-            //signs.Add(new Sign("+"));
-
-            //DadaInt b = new DadaInt("b");
-            //b.setData("456789");
-            //signs.Add(new Sign(b));
-
-
-            //Function f = new Function("f");
-            //List<Operation> options = new List<Operation>();
-            //AssignOperation assignOpthon = new AssignOperation(signs);
-            //options.Add(assignOpthon);
-            //f.setOptionList(options);
-
-
-            //SignTable signs2 = new SignTable();
-
-            //Sign s = new Sign(new DadaInt("s"));
-            //s.type = "结果";
-            //signs2.Add(s);
-
-
-            //signs2.Add(new Sign(f));
-
-            //AssignOperation assignOpthon2 = new AssignOperation(signs2);
-
-            //assignOpthon2.doSomethings();
 
 
 
-            //assignOpthon.doSomethings();
-            //MateData mateData = assignOpthon.result;
+
+        //public void test()//以下全是test!!!!!!!!!!
+        //{
+        //    //f(){
+        //    //    return 1 + 2;
+        //    //}
+        //    //a = f();
+        //    //SignTable signs = new SignTable();
+
+        //    //DadaInt a = new DadaInt("a");
+        //    //a.setData("456789");
+        //    //signs.Add(new Sign(a));
+
+        //    //signs.Add(new Sign("+"));
+
+        //    //DadaInt b = new DadaInt("b");
+        //    //b.setData("456789");
+        //    //signs.Add(new Sign(b));
 
 
-            //以下测试
-            //不要跑起来,这个函数没有递归出口,可以断点调试
+        //    //Function f = new Function("f");
+        //    //List<Operation> options = new List<Operation>();
+        //    //AssignOperation assignOpthon = new AssignOperation(signs);
+        //    //options.Add(assignOpthon);
+        //    //f.setOptionList(options);
 
-            //
-            //Func foo(a){
-            //    b=a+1;    
-            //    foo(b);
-            //}
-            //foo(1)
+
+        //    //SignTable signs2 = new SignTable();
+
+        //    //Sign s = new Sign(new DadaInt("s"));
+        //    //s.type = "结果";
+        //    //signs2.Add(s);
+
+
+        //    //signs2.Add(new Sign(f));
+
+        //    //AssignOperation assignOpthon2 = new AssignOperation(signs2);
+
+        //    //assignOpthon2.doSomethings();
+
+
+
+        //    //assignOpthon.doSomethings();
+        //    //MateData mateData = assignOpthon.result;
+
+
+        //    //以下测试
+        //    //不要跑起来,这个函数没有递归出口,可以断点调试
+
+        //    //
+        //    //Func foo(a){
+        //    //    b=a+1;    
+        //    //    foo(b);
+        //    //}
+        //    //foo(1)
 
 
 
@@ -169,29 +176,18 @@ namespace Edit
 
 
 
-            //Func foo(a)=================
-            SignTable signs = new SignTable();
-            Sign s1 = new Sign("","保留字");
-            Sign s2 = new Sign("foo","funcname");
-            Sign args = new Sign("a", "args");
+        //    //Func foo(a)=================
+        //    SignTable signs = new SignTable();
+        //    Sign s1 = new Sign("","保留字");
+        //    Sign s2 = new Sign("foo","funcname");
+        //    Sign args = new Sign("a", "args");
 
-            signs.Add(s1);
-            signs.Add(s2);
-            signs.Add(args);
+        //    signs.Add(s1);
+        //    signs.Add(s2);
+        //    signs.Add(args);
 
-            FunctionDefinationOpration fdo = new FunctionDefinationOpration(signs);
-            //=====================================
-
-
-
-
-
-
-
-
-            // {=====================函数定义的前括号
-            List<Operation> fooOperator = new List<Operation>();
-            //==================================
+        //    FunctionDefinationOpration fdo = new FunctionDefinationOpration(signs);
+        //    //=====================================
 
 
 
@@ -200,16 +196,27 @@ namespace Edit
 
 
 
-            //    b=a+1;===========================
-            SignTable op1Signtable = new SignTable();
+        //    // {=====================函数定义的前括号
+        //    List<Operation> fooOperator = new List<Operation>();
+        //    //==================================
 
-            op1Signtable.Add(new Sign("b","结果"));
-            op1Signtable.Add(new Sign("a"));
-            op1Signtable.Add(new Sign("","+"));
-            op1Signtable.Add(new Sign(new DadaInt("","1")));
+
+
+
+
+
+
+
+        //    //    b=a+1;===========================
+        //    SignTable op1Signtable = new SignTable();
+
+        //    op1Signtable.Add(new Sign("b","结果"));
+        //    op1Signtable.Add(new Sign("a"));
+        //    op1Signtable.Add(new Sign("","+"));
+        //    op1Signtable.Add(new Sign(new DadaInt("","1")));
   
-            AssignOperation assign1 = new AssignOperation(op1Signtable);
-            //=========================================
+        //    AssignOperation assign1 = new AssignOperation(op1Signtable);
+        //    //=========================================
 
 
 
@@ -220,29 +227,16 @@ namespace Edit
 
 
 
-            //    foo ( b ) ;===============================
-            SignTable op2Signtable = new SignTable();
+        //    //    foo ( b ) ;===============================
+        //    SignTable op2Signtable = new SignTable();
     
-            FunctionBuilder foobuilder = Lex.TotalFunctionList.getFunctionBuilderByName("foo");     
-            op2Signtable.Add(new Sign(foobuilder));
-            op2Signtable.Add(new Sign("b", "args"));
+        //    FunctionBuilder foobuilder = Lex.TotalFunctionList.getFunctionBuilderByName("foo");     
+        //    op2Signtable.Add(new Sign(foobuilder));
+        //    op2Signtable.Add(new Sign("b", "args"));
 
 
-            AssignOperation assign2 = new AssignOperation(op2Signtable);
-            //===============================================
-
-
-
-
-
-
-
-            // }  =====================函数声明结尾时的花括号
-            List<Operation> operations = new List<Operation>();
-            operations.Add(assign1);
-            operations.Add(assign2);
-            fdo.addOperatorList(operations);
-            //=======================================================
+        //    AssignOperation assign2 = new AssignOperation(op2Signtable);
+        //    //===============================================
 
 
 
@@ -250,23 +244,36 @@ namespace Edit
 
 
 
-
-            //foo(1);==============================
-            SignTable useSigntable = new SignTable();
-
-            FunctionBuilder f1 = Lex.TotalFunctionList.getFunctionBuilderByName("foo");
-            useSigntable.Add(new Sign(f1));
-            useSigntable.Add(new Sign(new DadaInt("","1"),"args"));
-            AssignOperation use = new AssignOperation(useSigntable);
-            //==================================
+        //    // }  =====================函数声明结尾时的花括号
+        //    List<Operation> operations = new List<Operation>();
+        //    operations.Add(assign1);
+        //    operations.Add(assign2);
+        //    fdo.addOperatorList(operations);
+        //    //=======================================================
 
 
 
 
 
-            use.doSomethings(Lex.TotalSignList);
 
 
-        }
+
+        //    //foo(1);==============================
+        //    SignTable useSigntable = new SignTable();
+
+        //    FunctionBuilder f1 = Lex.TotalFunctionList.getFunctionBuilderByName("foo");
+        //    useSigntable.Add(new Sign(f1));
+        //    useSigntable.Add(new Sign(new DadaInt("","1"),"args"));
+        //    AssignOperation use = new AssignOperation(useSigntable);
+        //    //==================================
+
+
+
+
+
+        //    use.doSomethings(Lex.TotalSignList);
+
+
+        //}
     }
 }

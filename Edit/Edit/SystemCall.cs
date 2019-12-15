@@ -23,5 +23,15 @@ namespace Edit
                 Form1.output.ScrollToCaret();
             }));
         }
+
+        public static void Print(String s)
+        {  //打印
+            Form1.output.Invoke(new Action(() =>
+            {
+                Form1.output.Text += s;
+                Form1.output.Select(Form1.output.Text.Length, 0);
+                Form1.output.ScrollToCaret();
+            }));
+        }
     }
 }

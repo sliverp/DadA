@@ -8,6 +8,7 @@ using Edit.Error;
 
 namespace Edit
 {
+    [Serializable]
     class FunctionBuilder:MateData
     {
 
@@ -57,7 +58,7 @@ namespace Edit
         }
     }
 
-
+    [Serializable]
     class Function:MateData
     {
         List<Operation> optionList;
@@ -125,6 +126,7 @@ namespace Edit
         }
     }
 
+    [Serializable]
     class Print : Function
     {
         public Print(string id) : base(id) { }

@@ -12,7 +12,7 @@ namespace Edit.Error
     /// </summary>
     public class ComplieException:Exception
     {
-        protected String hint=null;//错误提示
+        public String hint=null;//错误提示
         protected String line = null;//错误所处的行
         protected String pos = null;//错误所处的列
         protected String filepath = null;//错误文件

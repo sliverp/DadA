@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Edit.Data;
+using Edit.Error;
 namespace Edit
 {
     class ComplierAndRunner
@@ -13,6 +14,11 @@ namespace Edit
         public void init()
         {
             //初始化系统函数
+
+            
+            //初始化全局变量
+            Lex.TotalFunctionList.Clear();
+            Lex.TotalSignList.Clear();
 
             //初始化print函数
             FunctionBuilder printFB = new FunctionBuilder("print");
@@ -24,28 +30,116 @@ namespace Edit
         }
        public ComplierAndRunner(String program)
         {
-            //内存有点泄漏,再说
             this.Lexer = new Lex(program);
             this.init();
            
         }
+        public void endRunner()
+        {
+            //程序实行结束善后
+            Lex.TotalFunctionList.Clear();
+            Lex.TotalSignList.Clear();
+
+        }
 
         public void programStart()
         {
-            //Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
-            //startFunction.run();
+            try
+            {
+                Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
+                startFunction.run();
+            }
+            catch (FunctionNotDefine e)
+            {
+                SystemCall.Print(e.hint);
+            }
+            finally
+            {
+                this.endRunner();
+            }
+           
+            
 
+
+           
+
+
+
+        }
+
+
+        //测试用
+        public void test()
+        {
             //测试print函数
-            FunctionBuilder foobuilder = Lex.TotalFunctionList.getFunctionBuilderByName("print");
-            SignTable s = new SignTable();
-            Sign a1 = new Sign(new DadaInt("", "12456"), "args");
-            Sign a2 = new Sign(new DadaInt("", "12456"), "args");
-            Sign a3 = new Sign(new DadaInt("", "12456"), "args");
-            s.Add(a1);
-            s.Add(a1);
-            s.Add(a1);
-            Function f = foobuilder.build(s);
-            f.run();
+            //FunctionBuilder foobuilder = Lex.TotalFunctionList.getFunctionBuilderByName("print");
+            //SignTable s = new SignTable();
+            //Sign a1 = new Sign(new DadaInt("", "12456"), "args");
+            //Sign a2 = new Sign(new DadaInt("", "12456"), "args");
+            //Sign a3 = new Sign(new DadaInt("", "12456"), "args");
+            //s.Add(a1);
+            //s.Add(a1);
+            //s.Add(a1);
+            //Function f = foobuilder.build(s);
+            //f.run();
+
+
+
+
+            /*
+             a=1;
+            while(a<100){
+                a=a+1:
+                print(a);
+            }
+             
+             */
+
+            //a=1;=====================================
+            SignTable st1 = new SignTable();
+            st1.Add(new Sign("a", "结果"));
+            st1.Add(new Sign(new DadaInt("", "1")));
+            AssignOperation ass = new AssignOperation(st1);
+
+            //while(a<100)
+            CirculateOperation cop = new CirculateOperation();
+            SignTable condition = new SignTable();
+            condition.Add(new Sign("a", "ConditionLeft"));
+            condition.Add(new Sign("", "<"));
+            condition.Add(new Sign(new DadaInt("", "1000"), "ConditionRight"));
+            cop.setCondition(condition);
+
+            //{
+            List<Operation> cb = new List<Operation>();
+
+
+            //a=a+1:
+            SignTable st2 = new SignTable();
+            st2.Add(new Sign("a", "结果"));
+            st2.Add(new Sign("a"));
+            st2.Add(new Sign("", "+"));
+            st2.Add(new Sign(new DadaInt("", "1")));
+            AssignOperation ass2 = new AssignOperation(st2);
+
+
+
+            //print(a);
+            FunctionBuilder print = Lex.TotalFunctionList.getFunctionBuilderByName("print");
+            SignTable st3 = new SignTable();
+            st3.Add(new Sign(print));
+            st3.Add(new Sign("a", "args"));
+            AssignOperation ass3 = new AssignOperation(st3);
+
+            //}
+            cb.Add(ass2);
+            cb.Add(ass3);
+            cop.setCirculateBody(cb);
+
+
+
+            //测试开始执行
+            ass.doSomethings(Lex.TotalSignList);
+            cop.doSomethings(Lex.TotalSignList);
         }
     }
 }

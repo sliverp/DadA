@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Edit.Error;
 namespace Edit
 {
     public partial class Form1 : Form
@@ -110,15 +110,12 @@ namespace Edit
 
         private void 开始执行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TextBox textBox=(TextBox)Controls.Find("programInput", false).First();
+            TextBox textBox=(TextBox)Controls.Find("programInput", false).First();
             Form1.output = (TextBox)Controls.Find("textBox2", false).First();
             Form1.output.Text = "";
-            ComplierAndRunner complier = new ComplierAndRunner("");
+            ComplierAndRunner complier = new ComplierAndRunner(textBox.Text);
             Thread thread = new Thread(new ThreadStart(complier.programStart));
-            thread.Start();
-
-            
-          
+            thread.Start(); 
         }
     }
 }
