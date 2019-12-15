@@ -19,7 +19,8 @@ namespace Edit.Data
         public String id;
         public MateData(String id)
         {
-            this.id = id;
+            if (id == "") this.id = Utils.getRandomId();
+            else this.id = id;
         }
         public virtual String toString()
         {
