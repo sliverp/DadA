@@ -47,7 +47,7 @@ namespace Edit
         {
             try
             {
-                //Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
+                Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
                 //startFunction.run();
                 //test();
                 fakeTest();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,8 +15,8 @@ namespace Edit
         [STAThread]
         static void Main()
         {
-            Lex test = new Lex("f(){\n\treturn 1 + 2;\n}\na = f();");
-
+            //Lex test = new Lex("func f(){\n\treturn 1 + 2;\n}\na = f();");
+            
             /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
