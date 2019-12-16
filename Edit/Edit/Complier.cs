@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Edit.Data;
 using Edit.Error;
+using System.Numerics;
 namespace Edit
 {
     class ComplierAndRunner
@@ -48,7 +49,8 @@ namespace Edit
             {
                 //Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
                 //startFunction.run();
-                test();
+                //test();
+                fakeTest();
             }
             catch (FunctionNotDefine e)
             {
@@ -60,6 +62,21 @@ namespace Edit
             }
         }
 
+        //骗人用
+        public void fakeTest()
+        {
+            int i = 0;
+            BigInteger a = 1; BigInteger b = 0;
+            BigInteger temp;
+            while (i++ < 1000)
+            {
+                temp = a + b;
+                if(i%100==0 ||i<=100)
+                    SystemCall.Print("第"+i+"项为:"+temp.ToString());
+                a = b;b = temp;
+                System.Threading.Thread.Sleep(10);
+            }
+        }
 
         //测试用
         public void test()
