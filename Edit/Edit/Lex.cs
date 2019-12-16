@@ -92,16 +92,20 @@ namespace Edit
     {
         public static SignTable TotalSignList = new SignTable();//全局符号表
         public List<Operation> optionsList = new List<Operation>();
-        public List<List<String>> sentencec = new List<List<string>>();
+        public List<List<String>> sentences = new List<List<string>>();
         public static FunctionTable TotalFunctionList = new FunctionTable();//存有哪些声明的函数
         public Lex(String program)
         {
-            List<String> sentences = program.Split(';').ToList();
-            foreach(String sentence in sentences)
+            List<String> rawSentences = program.Split('\n').ToList();
+            foreach(String sentence in rawSentences)
             {
-                List<String> words = sentence.Split(' ').ToList();
-                this.sentencec.Add(words);
+                List<String> words = sentence.Replace("\t","").Split(' ').ToList();
+                foreach(String word in words)
+                {
+
+                }
             }
+            
         }
         public static bool isKeyWord(String s)
         {
