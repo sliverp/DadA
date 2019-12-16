@@ -14,19 +14,21 @@ namespace Edit.Data
         String getHashcode();
     }
     //所有数据的基类
+    [Serializable]
     class MateData
     {
         public String id;
         public MateData(String id)
         {
-            this.id = id;
+            if (id == "") this.id = Utils.getRandomId();
+            else this.id = id;
         }
         public virtual String toString()
         {
             return "";
         }
     }
-
+    [Serializable]
     class DadaString : MateData,Hashable
     {
         private String storage { get; set; }//仓库
@@ -60,7 +62,7 @@ namespace Edit.Data
             return this.storage;
         }
     }
-
+    [Serializable]
     class DadaInt : MateData,Hashable//数字
     {
         private BigInteger storage;//大整数
@@ -103,8 +105,27 @@ namespace Edit.Data
         {
             return this.storage.ToString();
         }
+
+        public static bool operator <(DadaInt a, DadaInt b)
+        {
+            return a.storage < b.storage;
+        }
+        public static bool operator >(DadaInt a, DadaInt b)
+        {
+            return a.storage > b.storage;
+        }
+
+        public static bool operator !=(DadaInt a, DadaInt b)
+        {
+            return a.storage.ToString() != b.storage.ToString();
+        }
+        public static bool operator ==(DadaInt a, DadaInt b)
+        {
+            return a.storage.ToString() ==b.storage.ToString();
+        }
     }
 
+    [Serializable]
     class DadaList : MateData
     {
         private List<MateData> storage = new List<MateData>();
@@ -121,6 +142,7 @@ namespace Edit.Data
         }
     }
 
+    [Serializable]
     class DadaMap : MateData//map
     {
         private Dictionary<MateData, MateData> storage = new Dictionary<MateData, MateData>();

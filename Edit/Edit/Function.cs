@@ -8,11 +8,15 @@ using Edit.Error;
 
 namespace Edit
 {
+    [Serializable]
     class FunctionBuilder:MateData
     {
+
+        public static FunctionBuilder Print;
         List<Operation> optionList;
         public String name;
         SignTable localVariables = new SignTable();
+        private Function template;
         public FunctionBuilder(String name):base(name)
         {
             this.name = name;
@@ -25,6 +29,17 @@ namespace Edit
 
         public Function build(List<Sign> args)
         {
+            if (this.template != null)
+            {
+                
+                if(this.template is Print)
+                {
+                    Print ff = this.template as Print;
+                    ff.setArgsList(args);
+                    return ff;//应该从这里返回
+                }
+                return this.template;
+            }
             Function f = new Function(Utils.getRandomId(), this.name);
             f.setFormalArgsList(this.localVariables);
             f.setArgsList(args);
@@ -36,23 +51,27 @@ namespace Edit
         {
             this.optionList = optionList;
         }
+
+        public void setTemplateFunction(Function template)
+        {
+            this.template = template;
+        }
     }
 
-
+    [Serializable]
     class Function:MateData
     {
         List<Operation> optionList;
         List<MateData> optionResult;
         String name;
-        int argsPushPointer = 0;
-        SignTable localVariables = new SignTable();
-        List<MateData> argsData = new List<MateData>();
+        protected SignTable localVariables = new SignTable();
 
+      
         public Function(String id) : base(id) { }
         public Function(String id,String name) : base(id) { this.name = name; }
 
 
-        public void setArgsList(List<Sign> args)//调用函数时添加实参
+        public virtual void setArgsList(List<Sign> args)//调用函数时添加实参
         {
             if (args.ToArray().Length > localVariables.ToArray().Length)
             {
@@ -89,7 +108,7 @@ namespace Edit
             
             this.optionList = optionList;
         }
-        public MateData run()
+        public virtual MateData run()
         {
             foreach(Operation op in this.optionList)
             {
@@ -104,6 +123,25 @@ namespace Edit
                 //==============
             }
             return optionList.Find((c) =>c.mean == "返回").result;
+        }
+    }
+
+    [Serializable]
+    class Print : Function
+    {
+        public Print(string id) : base(id) { }
+        public override MateData run()
+        {
+            SystemCall.Print(this.localVariables.ToArray());
+            return new MateData("");
+        }
+        public override void setArgsList(List<Sign> args)
+        {
+            this.localVariables.Clear();
+            foreach(Sign s in args)
+            {
+                this.localVariables.Add(s);
+            }
         }
     }
 }

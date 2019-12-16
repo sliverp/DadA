@@ -35,6 +35,8 @@
             this.开始执行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.programInput = new System.Windows.Forms.TextBox();
+            //嘿嘿嘿
+            this.programInput.Text = "main() {\r\n a = 1;\r\n    while (a < 100) {\r\n print(a );\r\n a = a + 1;\r\n    }\r\n}";
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -50,7 +52,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(12, 4, 0, 4);
-            this.menuStrip1.Size = new System.Drawing.Size(246, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(126, 29);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -103,31 +105,31 @@
             this.programInput.Multiline = true;
             this.programInput.Name = "programInput";
             this.programInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.programInput.Size = new System.Drawing.Size(1047, 600);
+            this.programInput.Size = new System.Drawing.Size(1047, 484);
             this.programInput.TabIndex = 1;
             this.programInput.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.programInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.input_keyPress);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(24, 670);
+            this.textBox2.Location = new System.Drawing.Point(24, 561);
             this.textBox2.Margin = new System.Windows.Forms.Padding(6);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(1047, 91);
+            this.textBox2.Size = new System.Drawing.Size(1047, 200);
             this.textBox2.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 647);
+            this.label1.Location = new System.Drawing.Point(20, 531);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 24);
+            this.label1.Size = new System.Drawing.Size(106, 24);
             this.label1.TabIndex = 3;
-            this.label1.Text = "输出:";
+            this.label1.Text = "Console:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // openFileDialog1
