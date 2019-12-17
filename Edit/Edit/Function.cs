@@ -11,8 +11,6 @@ namespace Edit
     [Serializable]
     class FunctionBuilder:MateData
     {
-
-        public static FunctionBuilder Print;
         List<Operation> optionList;
         public String name;
         SignTable localVariables = new SignTable();

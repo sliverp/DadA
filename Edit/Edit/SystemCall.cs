@@ -33,5 +33,25 @@ namespace Edit
                 Form1.output.ScrollToCaret();
             }));
         }
+
+        public static void Print(List<int> lt)
+        {  //打印
+            String s = "[";
+            for (int i = 0; i < lt.ToArray().Length; i++)
+            {
+                s += lt[i].ToString();
+                if(i < lt.ToArray().Length - 1)
+                {
+                    s += ",";
+                }
+            }
+            s += "]";
+            Form1.output.Invoke(new Action(() =>
+            {
+                Form1.output.Text += s + "\r\n";
+                Form1.output.Select(Form1.output.Text.Length, 0);
+                Form1.output.ScrollToCaret();
+            }));
+        }
     }
 }

@@ -11,7 +11,6 @@ F:\代码\c#\Edit\Edit\obj\Debug\Edit.pdb
 F:\代码\GitHub\DadA\Edit\Edit\bin\Debug\Edit.exe.config
 F:\代码\GitHub\DadA\Edit\Edit\bin\Debug\Edit.exe
 F:\代码\GitHub\DadA\Edit\Edit\bin\Debug\Edit.pdb
-F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csprojAssemblyReference.cache
 F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.Form1.resources
 F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.Properties.Resources.resources
 F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.GenerateResource.cache
@@ -28,3 +27,4 @@ C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.GenerateRes
 C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.CoreCompileInputs.cache
 C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.exe
 C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.pdb
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.Installer1.resources

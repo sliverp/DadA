@@ -36,7 +36,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.programInput = new System.Windows.Forms.TextBox();
             //嘿嘿嘿
-            this.programInput.Text = "main() {\r\n a = 1;\r\n    while (a < 100) {\r\n print(a );\r\n a = a + 1;\r\n    }\r\n}";
+            //this.programInput.Text = "main() {\r\n a = 1;\r\n    while (a < 100) {\r\n print(a );\r\n a = a + 1;\r\n    }\r\n}";
+            this.programInput.Text = "";
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();

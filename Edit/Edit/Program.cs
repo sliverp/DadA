@@ -14,13 +14,13 @@ namespace Edit
         [STAThread]
         static void Main()
         {
-            Lex test = new Lex("f(){\n\treturn 1 + 2;\n}\na = f();");
+            //Lex test = new Lex("f(){\n\treturn 1 + 2;\n}\na = f();");
 
-            /*
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            */
+            
         }
     }
 }

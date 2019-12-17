@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edit", "Edit\Edit.csproj", "{42FAF79B-9E1F-4FB2-BAD9-11B4BDA783F4}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{07E41DA7-BFAA-4315-8A8B-AEAA39300E2B}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "宇宙最强IDE", "Setup\Setup.vdproj", "{07E41DA7-BFAA-4315-8A8B-AEAA39300E2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,9 +25,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC52BF69-E680-427D-8DFB-02B61B5C5368}
-	EndGlobalSection
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 EndGlobal
