@@ -74,7 +74,7 @@ namespace Edit
                 if(i%100==0 ||i<=100)
                     SystemCall.Print("第"+i+"项为:"+temp.ToString());
                 a = b;b = temp;
-                System.Threading.Thread.Sleep(10);
+                System.Threading.Thread.Sleep(20);
             }
         }
 
