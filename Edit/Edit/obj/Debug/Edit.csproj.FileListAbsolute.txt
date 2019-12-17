@@ -18,3 +18,13 @@ F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.GenerateResource.cache
 F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.CoreCompileInputs.cache
 F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.exe
 F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.pdb
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\bin\Debug\Edit.exe.config
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\bin\Debug\Edit.exe
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\bin\Debug\Edit.pdb
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csprojAssemblyReference.cache
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.Form1.resources
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.Properties.Resources.resources
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.GenerateResource.cache
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.CoreCompileInputs.cache
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.exe
+C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.pdb
