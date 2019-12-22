@@ -91,12 +91,48 @@ namespace Edit
         }
     }
 
+    class ClassTable : List<ClassBuilder>
+    {
+        public ClassBuilder getClassBuilderByname(String name)
+        {
+            ClassBuilder c = null;
+            c = this.Find((e) => e.name == name);
+            if (c == null)
+            {
+                ClassNotDefine ce = new ClassNotDefine("类名" + name + "未定义");
+                throw ce;
+            }
+            
+            return c;
+        }
+
+        public Class buildClassByname(String name,List<Sign> args)
+        {//创建类
+            ClassBuilder cb = this.getClassBuilderByname(name);
+
+            Class c = cb.build(args);
+            return c;
+        }
+        public Class buildObjectByname(String name,List<Sign> args)
+        {//创建对象
+            ClassBuilder cb = this.getClassBuilderByname(name);
+            Class c = this.Find((e) => e.name == name).build(args);
+            if (c == null)
+            {
+                ClassNotDefine ce = new ClassNotDefine("类名" + name + "未定义");
+                throw ce;
+            }
+            return c;
+        }
+    }
+
     class Lex
     {
         public static SignTable TotalSignList = new SignTable();//全局符号表
         public List<Operation> optionsList = new List<Operation>();
         public List<List<String>> sentences = new List<List<string>>();
         public static FunctionTable TotalFunctionList = new FunctionTable();//存有哪些声明的函数
+        public static ClassTable TotalClassList = new ClassTable();//存有哪些声明的类
         public Lex(String program)
         {
             List<String> rawSentences = program.Split('\n').ToList();
@@ -115,10 +151,7 @@ namespace Edit
 
             return true;
         }
-
-
-
-
+                     
         //public void test()//以下全是test!!!!!!!!!!
         //{
         //    //f(){

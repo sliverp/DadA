@@ -90,4 +90,13 @@ namespace Edit.Error
         }
 
     }
+
+    public class ClassNotDefine: ComplieException
+    {
+        //类未定义
+        public ClassNotDefine(string hint) : base(hint)
+        {
+            this.name = "ClassNotDefine";
+        }
+    }
 }

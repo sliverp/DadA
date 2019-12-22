@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class.cs" />
     <Compile Include="Complier.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="Installer1.cs">
