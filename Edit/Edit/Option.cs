@@ -43,8 +43,6 @@ namespace Edit
         {
             this.initSignTable(contextTable);
             SignTable runtimeTable = Utils.DeepCopy<SignTable>(this.signTable);//深拷贝运行时符号表
-            
-
 
             //执行函数
             for (int i=0;i< runtimeTable.size(); i++)
@@ -203,9 +201,9 @@ namespace Edit
     //循环
     class CirculateOperation : Operation
     {
-        Sign ConditionLeft;
-        Sign ConditionRight;
-        Sign type;
+        public Sign ConditionLeft;
+        public Sign ConditionRight;
+        public Sign type;
         List<Operation> circulateBody;
         private bool isBreak()
         {
