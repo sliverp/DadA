@@ -201,9 +201,9 @@ namespace Edit
     //循环
     class CirculateOperation : Operation
     {
-        Sign ConditionLeft;
-        Sign ConditionRight;
-        Sign type;
+        public Sign ConditionLeft;
+        public Sign ConditionRight;
+        public Sign type;
         List<Operation> circulateBody;
         private bool isBreak()
         {

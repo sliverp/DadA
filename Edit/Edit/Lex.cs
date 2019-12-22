@@ -144,11 +144,9 @@ namespace Edit
         public List<Operation> operationsList = new List<Operation>();
         public List<List<String>> sentences = new List<List<string>>();
         public static FunctionTable TotalFunctionList = new FunctionTable();//存有哪些声明的函数
-<<<<<<< HEAD
-    
-=======
+
         public static ClassTable TotalClassList = new ClassTable();//存有哪些声明的类
->>>>>>> f2561211b97fd205cd3bba5bc7be630a5d6ac0c2
+
         public Lex(String program)
         {
 
@@ -215,11 +213,10 @@ namespace Edit
         //该函数对每个符号串进行语法分析，生成最终的操作表
         public static List<Operation> Grammar(List<SignTable> rawOperations)
         {
-            List<Operation> result = new List<Operation>;
+            List<Operation> result = new List<Operation>();
 
             foreach(SignTable raw in rawOperations)
             {
-                Operation oper;
                 //遇到赋值语句，则要分析出：左值是？右值是？
                 if (raw[raw.size() - 1].id == "1")
                 {
@@ -243,7 +240,7 @@ namespace Edit
                                 raw[j].type = "args";
                         }
                     }
-                    oper = new AssignOperation(raw);
+                    AssignOperation oper = new AssignOperation(raw);
                     result.Add(oper);
                 }
                 //遇到函数定义语句，要分析出，函数名是？，变量是？
@@ -263,27 +260,42 @@ namespace Edit
                     {
                         raw[j].type = "args";
                     }
+                    FunctionDefinationOpration oper = new FunctionDefinationOpration(raw);
+                    result.Add(oper);
                 }
                 //遇到循环的语句，要分析出，循环判断条件是？判断左值是？右值是？
                 else
                 {
+                    CirculateOperation oper = new CirculateOperation();
                     //分析括号之内的条件
                     bool isleft = true; //标记应当为左值，假如遇到不等号，切换为右值
                     for(int i = 2; raw[i].id != ")"; i++)
                     {
                         if (raw[i].type == "id")
                         {
-                            if (isleft) raw[i].type = "ConditionLeft";
-                            else raw[i].type = "ConditionRight";
+                            if (isleft)
+                            {
+                                raw[i].type = "ConditionLeft";
+                                oper.ConditionLeft = raw[i];
+                            }
+                            else
+                            {
+                                raw[i].type = "ConditionRight";
+                                oper.ConditionRight = raw[i];
+                            }
+
                         }
                         else if(raw[i].type == "op")
                         {
                             isleft = !isleft;
                             raw[i].type = raw[i].id;
+                            oper.type = raw[i];
                         }
                     }
+                    result.Add(oper);
                 }
             }
+            return result;
         }
         
 
@@ -301,12 +313,12 @@ namespace Edit
         {
             return (value == "=" || value == "==" || value == "++" || value == "--" || value == "**" || value == "+=" || value == "+" || value == "-" || value == "*" || value == "/" || value == "and" || value == "not" || value == "or" || value == ">" || value == "<" || value == ">=" || value == "<=");
         }
-<<<<<<< HEAD
 
 
 
 
-=======
+
+
                      
         //public void test()//以下全是test!!!!!!!!!!
         //{
@@ -315,7 +327,7 @@ namespace Edit
         //    //}
         //    //a = f();
         //    //SignTable signs = new SignTable();
->>>>>>> f2561211b97fd205cd3bba5bc7be630a5d6ac0c2
+
 
 
     //public void test()//以下全是test!!!!!!!!!!
