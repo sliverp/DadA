@@ -43,8 +43,6 @@ namespace Edit
         {
             this.initSignTable(contextTable);
             SignTable runtimeTable = Utils.DeepCopy<SignTable>(this.signTable);//深拷贝运行时符号表
-            
-
 
             //执行函数
             for (int i=0;i< runtimeTable.size(); i++)

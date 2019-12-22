@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Edit.Data;
 using Edit.Error;
+
 namespace Edit
 {
     [Serializable]
@@ -68,6 +69,16 @@ namespace Edit
         {
             return this.ToArray().Length;
         }
+
+        public override String ToString()
+        {
+            String result="";
+            foreach(Sign temp in this)
+            {
+                result += temp.id + " " + temp.type + "\n";
+            }
+            return result;
+        }
     }
 
     class FunctionTable: List<FunctionBuilder>
@@ -103,17 +114,20 @@ namespace Edit
         {
 
             List<String> rawSentences = program.Split('\n').ToList();
+            List<SignTable> rawOperations = new List<SignTable>();
             for(int i = 0; i<rawSentences.Count; i++)
             {
+                
                 SignTable tempT = new SignTable();
-                int operationMode;
-                List<String> words = rawSentences[i].Replace("\t", "").Split(' ').ToList();
+                int operationMode = 0;
+                List<String> words = rawSentences[i].Replace("\t", "").Replace(";","").Split(' ').ToList();
+                
                 foreach (String word in words)
                 {
                     if (word == "func")
                     {
                         operationMode = 2;
-                        tempT.Add(new Sign(word, "保留字")); 
+                        tempT.Add(new Sign(word, "保留字"));
                     } 
                     else if(word == "while")
                     {
@@ -122,7 +136,6 @@ namespace Edit
                     }
                     else 
                     {
-                        operationMode = 1;
                         if(word == "return")
                         {
                             tempT.Add(new Sign(word, "保留字"));
@@ -133,21 +146,111 @@ namespace Edit
                         }
                         else if (IsMark(word))
                         {
-                            tempT.Add()
+                            tempT.Add(new Sign(word, "标点"));
                         }
-                        
+                        else if (IsOperator(word))
+                        {
+                            tempT.Add(new Sign(word, "op"));
+                        }
+                        else
+                        {
+                            tempT.Add(new Sign(word, "id"));
+                        }
                     }
-
+                    
                 }
-
+                if (operationMode == 0)
+                    operationMode = 1;
+                tempT.Add(new Sign(operationMode + "", "操作"));
+                rawOperations.Add(tempT);
+                }
+            
+            foreach(SignTable operation in rawOperations)
+            {
+                Console.WriteLine(operation);
             }
             
             
         }
+        
+        //该函数对每个符号串进行语法分析，生成最终的操作表
+        public static List<Operation> Grammar(List<SignTable> rawOperations)
+        {
+            List<Operation> result = new List<Operation>;
+
+            foreach(SignTable raw in rawOperations)
+            {
+                Operation oper;
+                //遇到赋值语句，则要分析出：左值是？右值是？
+                if (raw[raw.size() - 1].id == "1")
+                {
+                    int i = 0;
+                    for (; i < raw.size(); i++)
+                    {
+                        if (raw[i].id == "=") break;
+                    }
+                    if (i < raw.size())
+                    {
+                        //等号之前的变量标记为左值
+                        for(int j = i - 1; j >= 0; j--)
+                        {
+                            if (raw[j].type == "id")
+                                raw[j].type = "结果";
+                        }
+                        //等号之后的变量标记位右值
+                        for(int j = i + 1; j < raw.size(); j++)
+                        {
+                            if (raw[j].type == "id")
+                                raw[j].type = "args";
+                        }
+                    }
+                    oper = new AssignOperation(raw);
+                    result.Add(oper);
+                }
+                //遇到函数定义语句，要分析出，函数名是？，变量是？
+                else if(raw[raw.size() - 1].id == "2")
+                {
+                    int i = 0;
+                    for ( ; i < raw.size(); i++)
+                    {
+                        if (raw[i].type == "保留字")
+                        {//标记上该id为函数名
+                            raw[i + 1].type = "funcname";
+                        }
+                        else if (raw[i].id == "(") break;
+                    }
+                    //把前括号到后括号的内容都标记为args
+                    for (int j = i + 1; raw[j].id != ")"; j++)
+                    {
+                        raw[j].type = "args";
+                    }
+                }
+                //遇到循环的语句，要分析出，循环判断条件是？判断左值是？右值是？
+                else
+                {
+                    //分析括号之内的条件
+                    bool isleft = true; //标记应当为左值，假如遇到不等号，切换为右值
+                    for(int i = 2; raw[i].id != ")"; i++)
+                    {
+                        if (raw[i].type == "id")
+                        {
+                            if (isleft) raw[i].type = "ConditionLeft";
+                            else raw[i].type = "ConditionRight";
+                        }
+                        else if(raw[i].type == "op")
+                        {
+                            isleft = !isleft;
+                            raw[i].type = raw[i].id;
+                        }
+                    }
+                }
+            }
+        }
+        
 
         public static bool IsNumeric(String value)
         {
-            return Regex.IsMatch(value, @"^[+-]?\d*[.]?\d*$");
+            return Regex.IsMatch(value, @"^\d*[.]?\d*$");
         }
 
         public static bool IsMark(String value)

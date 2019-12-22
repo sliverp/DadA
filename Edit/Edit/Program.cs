@@ -15,8 +15,8 @@ namespace Edit
         [STAThread]
         static void Main()
         {
-            //Lex test = new Lex("func f(){\n\treturn 1 + 2;\n}\na = f();");
-            
+            Lex test = new Lex("func f ( ) {\n\treturn 1 + 2;\n}\na = f ( );");
+            Console.ReadLine();
             /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
