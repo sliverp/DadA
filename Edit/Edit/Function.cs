@@ -28,8 +28,7 @@ namespace Edit
         public Function build(List<Sign> args)
         {
             if (this.template != null)
-            {
-                
+            {                
                 if(this.template is Print)
                 {
                     Print ff = this.template as Print;
@@ -120,7 +119,7 @@ namespace Edit
                 System.Threading.Thread.Sleep(1000);
                 //==============
             }
-            return optionList.Find((c) =>c.mean == "返回").result;
+            return optionList.Find((e) =>e.mean == "返回").result;
         }
     }
 

@@ -264,4 +264,73 @@ namespace Edit
             }
         }
     }
+
+    //类定义语句
+    class ClassDefinationOperation:Operation
+    {
+        /*类的定义：
+        Class clc{
+            a=123;
+            b=456;
+            Func foo(a,b){
+             return a+b;
+            }
+        }
+
+        SignTable格式：
+        signs[0].id=null
+        signs[0].content=null
+        signs[0].type=保留字
+
+        signs[1].id=Class
+        signs[1].content=clc
+
+        signs[2].id=a
+        signs[2].content=Matedata
+        signs[2].type="args"
+
+        signs[3].id=foo
+        signs[3].content=Function        
+             List<Operation>格式为:
+     operations[0]=AssignmentOperation()
+     operations[1]=AssignmentOperation()
+     operations[2]=AssignmentOperation()*/
+
+        Class c;
+        ClassBuilder cb;
+        String classname = "";
+        public ClassDefinationOperation(SignTable signs)
+        {
+            if (signs[0].type == "保留字")
+            {
+                foreach (Sign sign in signs)
+                {
+                    if (sign.type == "保留字") continue;//讲道理不需要验证,但是听说验证一下显得专业
+                    if (sign.type == "classname")//讲道理不需要验证,但是听说验证一下显得专业
+                    {
+                        classname = sign.id;
+                        c = new Class(sign.id);
+                        cb = new ClassBuilder(classname);
+                        continue;
+                    }
+                    if (sign.type == "args")
+                    {
+                        cb.addArgs(sign);
+                    }
+                }
+                Lex.TotalClassList.Add(cb);
+            }
+        }
+
+        public void addOperatorList(List<Operation> operations)
+        {
+            Lex.TotalClassList.Find((e) => e.name == classname).setOperationList(operations);
+        }
+              
+        public override void doSomethings(SignTable signTable)
+        {
+            //nothing to do
+        }
+    }
+    
 }

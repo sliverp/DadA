@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Edit.Data;
 using Edit.Error;
 using System.Numerics;
+
 namespace Edit
 {
     class ComplierAndRunner
@@ -20,6 +21,7 @@ namespace Edit
             //初始化全局变量
             Lex.TotalFunctionList.Clear();
             Lex.TotalSignList.Clear();
+            Lex.TotalClassList.Clear();
 
             //初始化print函数
             FunctionBuilder printFB = new FunctionBuilder("print");
@@ -57,8 +59,8 @@ namespace Edit
                 }
                 else
                 {
-                    Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
-                    startFunction.run();
+                    Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);                    
+                    startFunction.run();                                 
                 }
 
             }
