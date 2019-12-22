@@ -28,3 +28,4 @@ C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csproj.CoreCompile
 C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.exe
 C:\Users\hbhs6\Documents\GitHub\DadA\Edit\Edit\obj\Debug\Edit.pdb
 F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.Installer1.resources
+F:\代码\GitHub\DadA\Edit\Edit\obj\Debug\Edit.csprojAssemblyReference.cache
