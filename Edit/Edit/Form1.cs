@@ -13,7 +13,7 @@ namespace Edit
 {
     public partial class Form1 : Form
     {
-        
+        public static String CurrentFileName;
         public static TextBox output;
         public Form1()
         {
@@ -22,7 +22,7 @@ namespace Edit
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -81,7 +81,16 @@ namespace Edit
         private void label1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            string filepath = openFileDialog.FileName;
+            try
+            {
+                string filepath = openFileDialog.FileName;
+              
+            }
+            catch (Exception)
+            {
+                //nothing
+            }
+            
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -92,10 +101,20 @@ namespace Edit
         private void openfileBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "C:\\Users\\PC\\Desktop";
+            openFileDialog.Filter = "DadA源文件(*.dada)|*.dada";
             openFileDialog.ShowDialog();
-            string filepath = openFileDialog.FileName;
-            TextBox textBox = (TextBox)Controls.Find("programInput", false).First();
-            textBox.Text = System.IO.File.ReadAllText(filepath);
+            try
+            {
+                string filepath = openFileDialog.FileName;
+                TextBox textBox = (TextBox)Controls.Find("programInput", false).First();
+                textBox.Text = System.IO.File.ReadAllText(filepath);
+                Form1.CurrentFileName = openFileDialog.SafeFileName;
+            }
+            catch (Exception)
+            {
+                //nothing
+            }
         }
 
         private void saveFileBtn_Click(object sender, EventArgs e)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openfileBtn = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,8 +36,6 @@
             this.开始执行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.programInput = new System.Windows.Forms.TextBox();
-            //嘿嘿嘿
-            this.programInput.Text = "main() {\r\n a = 1;\r\n    while (a < 100) {\r\n print(a );\r\n a = a + 1;\r\n    }\r\n}";
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -68,14 +67,14 @@
             // openfileBtn
             // 
             this.openfileBtn.Name = "openfileBtn";
-            this.openfileBtn.Size = new System.Drawing.Size(124, 22);
+            this.openfileBtn.Size = new System.Drawing.Size(180, 22);
             this.openfileBtn.Text = "打开文件";
             this.openfileBtn.Click += new System.EventHandler(this.openfileBtn_Click);
             // 
             // saveFileBtn
             // 
             this.saveFileBtn.Name = "saveFileBtn";
-            this.saveFileBtn.Size = new System.Drawing.Size(124, 22);
+            this.saveFileBtn.Size = new System.Drawing.Size(180, 22);
             this.saveFileBtn.Text = "保存文件";
             this.saveFileBtn.Click += new System.EventHandler(this.saveFileBtn_Click);
             // 
@@ -99,6 +98,7 @@
             // 
             this.programInput.AcceptsReturn = true;
             this.programInput.AcceptsTab = true;
+            this.programInput.BackColor = System.Drawing.SystemColors.Window;
             this.programInput.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.programInput.Location = new System.Drawing.Point(24, 41);
             this.programInput.Margin = new System.Windows.Forms.Padding(6);
@@ -112,6 +112,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox2.Location = new System.Drawing.Point(24, 561);
             this.textBox2.Margin = new System.Windows.Forms.Padding(6);
             this.textBox2.Multiline = true;
@@ -141,12 +142,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1086, 776);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.programInput);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";

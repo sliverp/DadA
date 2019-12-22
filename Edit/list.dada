@@ -1,0 +1,8 @@
+main(){
+    list=[];
+    while(i++=0<100){
+        list.add(randomInt());    
+    }
+    l2=list.sort();
+    print(l2);
+}

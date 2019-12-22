@@ -132,9 +132,11 @@ namespace Edit.Data
         public DadaList(String id) : base(id) { }
         public MateData getItem(int id){ return this.storage[id];}
         public void append(MateData item) { this.storage.Add(item); }
-        public void sort()
+        public List<MateData> sort()
         {
-            
+            List<MateData> temp = Utils.DeepCopy<List<MateData>>(this.storage);
+            temp.Sort();
+            return temp;
         }
         public void delate(int id)
         {

@@ -1,0 +1,14 @@
+//前多少项
+	func Fib(num){
+		a=1;
+		b=0;
+		while(c++=0<num){
+			if(c%100==0 or c<=100)
+				print("第"+c+"项为:",a);
+		a,b=b,a+b;
+		}
+	}
+
+	main(){
+		Fib(200);
+	}

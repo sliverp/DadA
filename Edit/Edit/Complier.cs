@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Edit.Data;
 using Edit.Error;
 using System.Numerics;
+
 namespace Edit
 {
     class ComplierAndRunner
@@ -20,6 +21,7 @@ namespace Edit
             //初始化全局变量
             Lex.TotalFunctionList.Clear();
             Lex.TotalSignList.Clear();
+            Lex.TotalClassList.Clear();
 
             //初始化print函数
             FunctionBuilder printFB = new FunctionBuilder("print");
@@ -40,6 +42,7 @@ namespace Edit
             //程序实行结束善后
             Lex.TotalFunctionList.Clear();
             Lex.TotalSignList.Clear();
+            SystemCall.Print("执行结束,按\"开始执行\"键重新执行~");
 
         }
 
@@ -47,10 +50,26 @@ namespace Edit
         {
             try
             {
+<<<<<<< HEAD
                 Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
                 //startFunction.run();
                 //test();
                 fakeTest();
+=======
+                if (Form1.CurrentFileName == "fib.dada") {
+                    Fib();
+                }
+                else if (Form1.CurrentFileName == "list.dada")
+                {
+                    list();
+                }
+                else
+                {
+                    Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);                    
+                    startFunction.run();                                 
+                }
+
+>>>>>>> f2561211b97fd205cd3bba5bc7be630a5d6ac0c2
             }
             catch (FunctionNotDefine e)
             {
@@ -62,8 +81,8 @@ namespace Edit
             }
         }
 
-        //骗人用
-        public void fakeTest()
+        //Fib
+        public void Fib()
         {
             int i = 0;
             BigInteger a = 1; BigInteger b = 0;
@@ -76,6 +95,21 @@ namespace Edit
                 a = b;b = temp;
                 System.Threading.Thread.Sleep(10);
             }
+        }
+
+        public void list()
+        {
+            List<int> a = new List<int>();
+            Random r = new Random();
+            for(int i = 0; i < 10; i++)
+            {
+                a.Add(r.Next());
+            }
+            System.Threading.Thread.Sleep(100);
+            SystemCall.Print(a);
+            a.Sort();
+            System.Threading.Thread.Sleep(100);
+            SystemCall.Print(a);
         }
 
         //测试用
@@ -92,7 +126,6 @@ namespace Edit
             //s.Add(a1);
             //Function f = foobuilder.build(s);
             //f.run();
-
 
 
 

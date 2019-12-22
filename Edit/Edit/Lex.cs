@@ -103,13 +103,52 @@ namespace Edit
         }
     }
 
+    class ClassTable : List<ClassBuilder>
+    {
+        public ClassBuilder getClassBuilderByname(String name)
+        {
+            ClassBuilder c = null;
+            c = this.Find((e) => e.name == name);
+            if (c == null)
+            {
+                ClassNotDefine ce = new ClassNotDefine("类名" + name + "未定义");
+                throw ce;
+            }
+            
+            return c;
+        }
+
+        public Class buildClassByname(String name,List<Sign> args)
+        {//创建类
+            ClassBuilder cb = this.getClassBuilderByname(name);
+
+            Class c = cb.build(args);
+            return c;
+        }
+        public Class buildObjectByname(String name,List<Sign> args)
+        {//创建对象
+            ClassBuilder cb = this.getClassBuilderByname(name);
+            Class c = this.Find((e) => e.name == name).build(args);
+            if (c == null)
+            {
+                ClassNotDefine ce = new ClassNotDefine("类名" + name + "未定义");
+                throw ce;
+            }
+            return c;
+        }
+    }
+
     class Lex
     {
         public static SignTable TotalSignList = new SignTable();//全局符号表
         public List<Operation> operationsList = new List<Operation>();
         public List<List<String>> sentences = new List<List<string>>();
         public static FunctionTable TotalFunctionList = new FunctionTable();//存有哪些声明的函数
+<<<<<<< HEAD
     
+=======
+        public static ClassTable TotalClassList = new ClassTable();//存有哪些声明的类
+>>>>>>> f2561211b97fd205cd3bba5bc7be630a5d6ac0c2
         public Lex(String program)
         {
 
@@ -262,10 +301,21 @@ namespace Edit
         {
             return (value == "=" || value == "==" || value == "++" || value == "--" || value == "**" || value == "+=" || value == "+" || value == "-" || value == "*" || value == "/" || value == "and" || value == "not" || value == "or" || value == ">" || value == "<" || value == ">=" || value == "<=");
         }
+<<<<<<< HEAD
 
 
 
 
+=======
+                     
+        //public void test()//以下全是test!!!!!!!!!!
+        //{
+        //    //f(){
+        //    //    return 1 + 2;
+        //    //}
+        //    //a = f();
+        //    //SignTable signs = new SignTable();
+>>>>>>> f2561211b97fd205cd3bba5bc7be630a5d6ac0c2
 
 
     //public void test()//以下全是test!!!!!!!!!!
