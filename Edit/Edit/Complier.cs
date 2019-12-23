@@ -50,12 +50,12 @@ namespace Edit
         {
             try
             {
-<<<<<<< HEAD
+
                 Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
                 //startFunction.run();
                 //test();
-                fakeTest();
-=======
+                //fakeTest();
+
                 if (Form1.CurrentFileName == "fib.dada") {
                     Fib();
                 }
@@ -65,11 +65,11 @@ namespace Edit
                 }
                 else
                 {
-                    Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);                    
+                    //Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);                    
                     startFunction.run();                                 
                 }
 
->>>>>>> f2561211b97fd205cd3bba5bc7be630a5d6ac0c2
+
             }
             catch (FunctionNotDefine e)
             {
