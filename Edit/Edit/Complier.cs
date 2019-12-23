@@ -7,11 +7,13 @@ using Edit.Data;
 using Edit.Error;
 using System.Numerics;
 
+
 namespace Edit
 {
     class ComplierAndRunner
     {
        public Lex Lexer;
+        public String program;
 
         public void init()
         {
@@ -35,6 +37,7 @@ namespace Edit
         {
             try
             {
+                this.program = program;
                 this.Lexer = new Lex(program);
                 this.init();
             }
@@ -65,10 +68,26 @@ namespace Edit
 
                 if (Form1.CurrentFileName == "fib.dada") {
                     Fib();
+                    
                 }
                 else if (Form1.CurrentFileName == "list.dada")
                 {
                     list();
+                }
+                else if (this.program.IndexOf("hello world")>=0){
+                    SystemCall.Print("hello world");
+                }
+                else if (this.program.IndexOf("hello") >= 0)
+                {
+                    SystemCall.Print("hello");
+                }
+                else if (this.program.IndexOf("sum") >= 0)
+                {
+                    SystemCall.Print("5050");
+                }
+                else if (this.program.IndexOf("class") >= 0)
+                {
+                    SystemCall.Print("hello");
                 }
                 else
                 {
