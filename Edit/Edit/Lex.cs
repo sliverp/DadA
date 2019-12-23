@@ -161,6 +161,8 @@ namespace Edit
                 
                 foreach (String word in words)
                 {
+                    if (word == "") continue;
+                    if (word[0] == '/' && word[1] == '/') break;
                     if (word == "func")
                     {
                         operationMode = 2;

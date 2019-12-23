@@ -33,8 +33,15 @@ namespace Edit
         }
        public ComplierAndRunner(String program)
         {
-            this.Lexer = new Lex(program);
-            this.init();
+            try
+            {
+                this.Lexer = new Lex(program);
+                this.init();
+            }
+            catch {
+                
+            }
+            
            
         }
         public void endRunner()
@@ -51,7 +58,7 @@ namespace Edit
             try
             {
 
-                Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
+                //Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);
                 //startFunction.run();
                 //test();
                 //fakeTest();
@@ -65,7 +72,7 @@ namespace Edit
                 }
                 else
                 {
-                    //Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);                    
+                    Function startFunction = Lex.TotalFunctionList.buildFunctionByName("main", null);                    
                     startFunction.run();                                 
                 }
 
